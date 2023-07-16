@@ -1,0 +1,10 @@
+# Ignorar pastas de compilação
+bin/
+obj/
+
+# Ignorar arquivos de configuração pessoal
+.vs/
+.vscode/
+
+# Ignorar arquivos de pacote
+packages/
