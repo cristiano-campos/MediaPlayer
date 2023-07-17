@@ -1,9 +1,10 @@
-﻿<!-- <Window x:Class="MediaPlayer.MainWindow"
+﻿ <Window x:Class="MediaPlayer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaPlayer"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MediaPlayer" Height="450" Width="800">
     <Grid Background="#212121">
@@ -15,62 +16,6 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <StackPanel Grid.Column = "0" Background="#424242" Margin="10">
-            <Label Content="Playlist" FontSize="20" Foreground="White" Margin="10"/>
-            <ListBox ItemsSource="{Binding Playlist}" SelectedItem="{Binding CurrentMedia}" Background="Transparent" BorderBrush="Transparent">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="5">
-                            <Image Source="c:\Users\crist\OneDrive\Documentos\msft\INF-0996\mediaplayer\MediaPlayer\Assets\musicIcon.jpg" Width="30" Height="30" Margin="5"/>
-                            <TextBlock Text="{Binding Title}" VerticalAlignment="Center" Foreground="White" FontSize="14"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Padding" Value="10"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#616161"/>
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="#757575"/>
-                                <Setter Property="Foreground" Value="White"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Command="{Binding PlayCommand}" Content="Play" Background="#4CAF50" Foreground="Black" Width="100" Height="50" Margin="5" BorderThickness="0"/>
-            <Button Command="{Binding PauseCommand}" Content="Pause" Background="#FF5722" Foreground="Black" Width="100" Height="50" Margin="5" BorderThickness="0"/>
-            <Button Command="{Binding StopCommand}" Content="Stop" Background="#F44336" Foreground="Black" Width="100" Height="50" Margin="5" BorderThickness="0"/>
-            <Button Command="{Binding NextCommand}" Content="Next" Background="#03A9F4" Foreground="Black" Width="100" Height="50" Margin="5" BorderThickness="0"/>
-            <Button Command="{Binding PreviousCommand}" Content="Previous" Background="#9C27B0" Foreground="Black" Width="100" Height="50" Margin="5" BorderThickness="0"/>
-        </StackPanel>
-    </Grid>
-</Window> --> 
-
-<Window x:Class="MediaPlayer.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MediaPlayer"
-        mc:Ignorable="d"
-        Title="MediaPlayer" Height="450" Width="800">
-    <Grid Background="#212121">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width ="5*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
         <StackPanel Grid.Column = "0" Background="#424242" Margin="10">
             <Label Content="Playlist" FontSize="20" Foreground="White" Margin="10"/>
             <ListBox ItemsSource="{Binding Playlist}" SelectedItem="{Binding CurrentMedia}" Background="Transparent" BorderBrush="Transparent">
@@ -103,13 +48,35 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Command="{Binding PlayCommand}" Content="Play" Background="#4CAF50" Foreground="Black" Width="100" Height="50" Margin="5" BorderThickness="0"/>
-            <Button Command="{Binding PauseCommand}" Content="Pause" Background="#FF5722" Foreground="Black" Width="100" Height="50" Margin="5" BorderThickness="0"/>
-            <Button Command="{Binding StopCommand}" Content="Stop" Background="#F44336" Foreground="Black" Width="100" Height="50" Margin="5" BorderThickness="0"/>
-            <Button Command="{Binding NextCommand}" Content="Next" Background="#03A9F4" Foreground="Black" Width="100" Height="50" Margin="5" BorderThickness="0"/>
-            <Button Command="{Binding PreviousCommand}" Content="Previous" Background="#9C27B0" Foreground="Black" Width="100" Height="50" Margin="5" BorderThickness="0"/>
+         <Button Command="{Binding PreviousCommand}" Background="#9C27B0" Foreground="Black" Width="100" Height="50" Margin="5" BorderThickness="0">
+                <materialDesign:PackIcon Kind="SkipPrevious" Height="30" Width="30" VerticalAlignment="Center" Foreground="White"/>
+            </Button>
+            <Button Command="{Binding PlayCommand}" Background="#4CAF50" Foreground="Black" Width="100" Height="50" Margin="5" BorderThickness="0">
+                <materialDesign:PackIcon Kind="Play" Height="30" Width="30" VerticalAlignment="Center" Foreground="White"/>
+            </Button>
+            <Button Command="{Binding PauseCommand}" Background="#FF5722" Foreground="Black" Width="100" Height="50" Margin="5" BorderThickness="0">
+                <materialDesign:PackIcon Kind="Pause" Height="30" Width="30" VerticalAlignment="Center" Foreground="White"/>
+            </Button>
+            <Button Command="{Binding StopCommand}" Background="#F44336" Foreground="Black" Width="100" Height="50" Margin="5" BorderThickness="0">
+                <materialDesign:PackIcon Kind="Stop" Height="30" Width="30" VerticalAlignment="Center" Foreground="White"/>
+            </Button>
+            <Button Command="{Binding NextCommand}" Background="#03A9F4" Foreground="Black" Width="100" Height="50" Margin="5" BorderThickness="0">
+                <materialDesign:PackIcon Kind="SkipNext" Height="30" Width="30" VerticalAlignment="Center" Foreground="White"/>
+            </Button>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <materialDesign:PackIcon Kind="VolumeHigh" VerticalAlignment="Center" Height="32" Width="32"/>
+                 <Slider x:Name="volumeSlider" Value="{Binding Volume, Mode=TwoWay}" Maximum="1" Minimum="0" Width="100"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>
+
+
+
+
+
+
+
+
 
 

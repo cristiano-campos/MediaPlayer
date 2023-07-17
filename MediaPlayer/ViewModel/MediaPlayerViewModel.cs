@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System;
 using System.Windows;
 using System.Windows.Media; 
+using System.Windows.Controls;
 using System.IO;
 using System.Linq;
 using MediaPlayer.Model;
@@ -17,15 +18,14 @@ public class MediaPlayerViewModel : ObservableObject
     private MediaPlayer mediaPlayer;
     private MediaState mediaState = MediaState.Stopped;
     private MediaFile currentMedia;
+
     public MediaFile CurrentMedia
     {
         get { return currentMedia; }
         set 
         { 
             SetProperty(ref currentMedia, value);
-            NotifyCommandsCanExecuteChanged();
-            
-         
+            NotifyCommandsCanExecuteChanged();     
         }
     }
 
@@ -34,6 +34,20 @@ public class MediaPlayerViewModel : ObservableObject
     {
         get { return playlist; }
         set { SetProperty(ref playlist, value); }
+    }
+
+    private double _volume = 0.5;
+    public double Volume
+    {
+        get { return _volume; }
+        set
+        {
+            if (SetProperty(ref _volume, value))
+            {
+                // Altere o volume do media player quando o Volume for alterado
+                mediaPlayer.Volume = _volume;
+            }
+        }
     }
 
     public IRelayCommand AddCommand {get; }
@@ -45,6 +59,8 @@ public class MediaPlayerViewModel : ObservableObject
     public IRelayCommand NextCommand { get; }
     public IRelayCommand PreviousCommand { get; }
 
+    public IRelayCommand VolumeCommand { get; }
+
     public MediaPlayerViewModel()
     {
         mediaPlayer = new MediaPlayer();
@@ -53,6 +69,14 @@ public class MediaPlayerViewModel : ObservableObject
             mediaState = MediaState.Stopped;
             NotifyCommandsCanExecuteChanged();
         };
+
+        mediaPlayer.Volume = Volume;
+
+        /*mediaPlayer.MediaEnded += (s, e) => 
+        {
+            mediaState = MediaState.Stopped;
+            NotifyCommandsCanExecuteChanged();
+        };*/
         
         Playlist = new ObservableCollection<MediaFile>();
 
@@ -65,6 +89,7 @@ public class MediaPlayerViewModel : ObservableObject
         PreviousCommand = new RelayCommand(Previous, CanExecutePrevious);
 
         //LoadPlaylist(@"C:\Users\crist\OneDrive\Documentos\msft\INF-0996\mediaplayer\MediaPlayer\Media");
+
     }
 
     private void NotifyCommandsCanExecuteChanged()
@@ -81,7 +106,7 @@ public class MediaPlayerViewModel : ObservableObject
     {
         var openFileDialog = new OpenFileDialog
         {
-            Filter = "MP3 files (*.mp3)|*.mp3",
+            Filter = "Media files (*.mp3)|*.mp3",
             Multiselect = true
         };
 
@@ -190,4 +215,7 @@ public class MediaPlayerViewModel : ObservableObject
         CurrentMedia = Playlist.FirstOrDefault();
 
     }
+
+
+
 }
